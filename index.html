@@ -1,25 +1,43 @@
-```html
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Agency of Security of Children</title>
-  <meta name="description" content="Agency of Security of Children. Public information portal and secure staff access." />
+  <meta name="description" content="Agency of Security of Children. Portail public et accès personnel." />
+
+  <!--
+    PORTAIL ASC
+    Astuce ARG: certains indices sont dans le code source.
+    Mdp de test: 1234
+    Id de test: 0175
+
+    Indice optionnel: si tu lis ceci, cherche aussi dans la console.
+  -->
+
   <style>
     :root{
-      --bg:#f6f7f8;
+      --bg:#f6f7fb;
       --panel:#ffffff;
-      --text:#111318;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --accent:#111827;
-      --danger:#7f1d1d;
-      --ok:#065f46;
-      --shadow: 0 12px 30px rgba(17,24,39,.08);
-      --radius: 16px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --good:#16a34a;
+      --accent:#2563eb;
+      --shadow: 0 12px 36px rgba(15,23,42,.10);
+      --radius: 18px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+
+      --retro-bg:#0b0f14;
+      --retro-panel:#0f1620;
+      --retro-line:#1f2a37;
+      --retro-text:#cbd5e1;
+      --retro-muted:#7b8aa6;
+      --retro-warn:#f59e0b;
+      --retro-bad:#fb7185;
+      --retro-good:#34d399;
     }
 
     *{box-sizing:border-box}
@@ -28,78 +46,81 @@
       margin:0;
       font-family: var(--sans);
       color: var(--text);
-      background: radial-gradient(1200px 600px at 20% 10%, #ffffff 0%, var(--bg) 50%, #f1f3f5 100%);
-      letter-spacing: .1px;
+      background:
+        radial-gradient(1100px 600px at 18% 10%, #ffffff 0%, var(--bg) 55%, #eef2ff 100%);
+      letter-spacing:.1px;
     }
 
     a{color:inherit;text-decoration:none}
     button,input{font-family:inherit}
     .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+
     .topbar{
-      display:flex;align-items:center;justify-content:space-between;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.84);
       backdrop-filter: blur(10px);
-      border-radius: 20px;
+      border-radius: 22px;
       padding:14px 16px;
       box-shadow: var(--shadow);
     }
-    .brand{display:flex;align-items:center;gap:12px}
+
+    .brand{display:flex;align-items:center;gap:12px;min-width: 260px}
     .logo{
-      width:42px;height:42px;border-radius:14px;
+      width:44px;height:44px;border-radius:16px;
       border:1px solid var(--line);
-      background: linear-gradient(180deg, #fff, #f3f4f6);
+      background: linear-gradient(180deg, #ffffff, #f1f5f9);
       display:grid;place-items:center;
       position:relative;
       overflow:hidden;
     }
     .logo::after{
       content:"";
-      position:absolute;inset:-20px;
-      background: conic-gradient(from 180deg, transparent, rgba(17,24,39,.06), transparent);
-      animation: spin 8s linear infinite;
+      position:absolute;inset:-30px;
+      background: conic-gradient(from 180deg, transparent, rgba(37,99,235,.12), transparent);
+      animation: spin 9s linear infinite;
     }
     .logo span{
       position:relative;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 1.6px;
-      color:#111827;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing: 1.2px;
+      color:#0f172a;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    .brand h1{margin:0;font-size:14px;font-weight:650;line-height:1.1}
+    .brand h1{margin:0;font-size:14px;font-weight:750;line-height:1.15}
     .brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}
 
-    .nav{
-      display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end
-    }
+    .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .chip{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.8);
+      background: rgba(255,255,255,.9);
       padding:8px 10px;
       border-radius: 999px;
       font-size:12px;
-      color:#111827;
+      color:#0f172a;
       transition: transform .08s ease, background .2s ease;
       cursor:pointer;
       user-select:none;
+      white-space:nowrap;
     }
     .chip:hover{transform: translateY(-1px);background:#fff}
-    .chip[aria-current="page"]{border-color:#cbd5e1;background:#fff}
+    .chip[aria-current="page"]{border-color:#bfdbfe;background:#eff6ff;color:#1d4ed8}
 
     .grid{
       display:grid;
-      grid-template-columns: 1.4fr .9fr;
+      grid-template-columns: 1.45fr .85fr;
       gap: 18px;
       margin-top: 18px;
     }
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
+      .brand{min-width: unset}
     }
 
     .card{
-      background: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.90);
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -110,62 +131,91 @@
       border-bottom:1px solid var(--line);
       display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
     }
-    .cardHeader h2{margin:0;font-size:14px;font-weight:650}
-    .cardHeader .sub{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+    .cardHeader h2{margin:0;font-size:14px;font-weight:750}
+    .cardHeader .sub{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
     .cardBody{padding:18px}
-    .muted{color:var(--muted)}
-    .small{font-size:12px}
-    .mono{font-family: var(--mono)}
-    .divider{height:1px;background:var(--line);margin:14px 0}
+
+    .tag{
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      font-size:11px;
+      background:#fff;
+      color: var(--muted);
+      white-space:nowrap;
+      align-items:center;
+      gap:8px;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;background: #94a3b8;
+    }
+    .tag.good{color:#166534;border-color:#bbf7d0;background:#f0fdf4}
+    .tag.good .dot{background: var(--good)}
+    .tag.info{color:#1d4ed8;border-color:#bfdbfe;background:#eff6ff}
+    .tag.info .dot{background: var(--accent)}
 
     .notice{
       border:1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 16px;
       padding:12px 12px;
-      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(243,244,246,.7));
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(241,245,249,.7));
     }
-    .notice strong{font-weight:650}
+    .notice strong{font-weight:750}
+    .divider{height:1px;background:var(--line);margin:14px 0}
+    .small{font-size:12px}
+    .muted{color:var(--muted)}
+    .mono{font-family: var(--mono)}
+
     .kv{
-      display:grid;grid-template-columns: 150px 1fr;
-      gap:8px 12px;
+      display:grid;grid-template-columns: 165px 1fr;
+      gap:10px 14px;
       font-size:12px;
-      padding:12px;
+      padding:14px;
       border:1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,.8);
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
     }
     .kv div:nth-child(odd){color:var(--muted)}
-    .kv div:nth-child(even){color:#111827}
+    .kv div:nth-child(even){color:#0f172a}
+
+    .ctaRow{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 12px;
+    }
+    @media (max-width: 520px){
+      .ctaRow{grid-template-columns:1fr}
+    }
 
     .btn{
       width:100%;
       display:inline-flex;align-items:center;justify-content:center;
       border:1px solid var(--line);
-      background:#111827;
+      background:#2563eb;
       color:#fff;
       padding:10px 12px;
-      border-radius: 14px;
+      border-radius: 16px;
       font-size:12px;
       cursor:pointer;
       transition: transform .08s ease, opacity .2s ease;
     }
     .btn:hover{transform: translateY(-1px)}
     .btn:active{transform: translateY(0)}
-    .btn.secondary{
-      background:#fff;color:#111827;
-    }
+    .btn.secondary{background:#fff;color:#0f172a}
 
     .field{display:grid;gap:8px;margin-top:12px}
     label{font-size:12px;color:var(--muted)}
     input{
       border:1px solid var(--line);
       background:#fff;
-      border-radius: 14px;
+      border-radius: 16px;
       padding:10px 12px;
       font-size:12px;
       outline:none;
     }
-    input:focus{border-color:#cbd5e1;box-shadow: 0 0 0 3px rgba(203,213,225,.45)}
+    input:focus{border-color:#bfdbfe;box-shadow: 0 0 0 3px rgba(191,219,254,.55)}
 
     .footer{
       margin-top:14px;
@@ -181,25 +231,146 @@
       position:fixed;
       right:16px;
       bottom:16px;
-      width:min(360px, calc(100vw - 32px));
-      background: rgba(17,24,39,.92);
+      width:min(380px, calc(100vw - 32px));
+      background: rgba(15,23,42,.92);
       color:#fff;
       border:1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
+      border-radius: 16px;
       padding:12px 12px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.22);
+      box-shadow: 0 18px 55px rgba(0,0,0,.22);
       display:none;
-      z-index: 50;
+      z-index: 60;
     }
-    .toast .t1{font-size:12px;font-weight:650}
-    .toast .t2{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px;line-height:1.35}
+    .toast .t1{font-size:12px;font-weight:750}
+    .toast .t2{font-size:12px;color:rgba(255,255,255,.76);margin-top:4px;line-height:1.35}
+    .fade{animation: fade .18s ease both}
+    @keyframes fade{from{opacity:0;transform: translateY(4px)}to{opacity:1;transform: translateY(0)}}
 
-    .fade{
-      animation: fade .18s ease both;
+    .mask{
+      position:fixed;inset:0;
+      background: rgba(246,247,251,.92);
+      display:none;z-index: 50;
     }
-    @keyframes fade{
-      from{opacity:0;transform: translateY(4px)}
-      to{opacity:1;transform: translateY(0)}
+    .modal{
+      position:fixed;inset:0;
+      display:none;z-index: 51;
+      align-items:center;justify-content:center;
+      padding:18px;
+    }
+    .modalPanel{
+      width:min(980px, 100%);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 20px 75px rgba(15,23,42,.22);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px
+    }
+    .modalTop h3{margin:0;font-size:13px;font-weight:750}
+    .x{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius: 14px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .modalBody{padding:16px}
+
+    /* ==============================
+       STYLE INTERNE RETRO ET FROID
+       ============================== */
+
+    body.internal{
+      background: radial-gradient(900px 500px at 40% 0%, #121b28 0%, var(--retro-bg) 60%, #070a0f 100%);
+      color: var(--retro-text);
+      letter-spacing: .2px;
+    }
+    body.internal .topbar{
+      border-color: var(--retro-line);
+      background: rgba(10,14,20,.82);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    body.internal .logo{
+      border-color: var(--retro-line);
+      background: linear-gradient(180deg, #0f1620, #0a0f16);
+    }
+    body.internal .logo::after{
+      background: conic-gradient(from 180deg, transparent, rgba(203,213,225,.10), transparent);
+    }
+    body.internal .logo span{color: var(--retro-text);font-family: var(--mono);letter-spacing: 2px}
+    body.internal .brand p{color: var(--retro-muted)}
+    body.internal .chip{
+      border-color: var(--retro-line);
+      background: rgba(15,22,32,.78);
+      color: var(--retro-text);
+    }
+    body.internal .chip[aria-current="page"]{
+      border-color: #334155;
+      background: rgba(30,41,59,.65);
+      color: var(--retro-text);
+    }
+    body.internal .card{
+      border-color: var(--retro-line);
+      background: rgba(15,22,32,.86);
+      box-shadow: 0 22px 80px rgba(0,0,0,.30);
+    }
+    body.internal .cardHeader{border-bottom-color: var(--retro-line)}
+    body.internal .cardHeader .sub{color: var(--retro-muted)}
+    body.internal .divider{background: var(--retro-line)}
+    body.internal .notice{
+      border-color: var(--retro-line);
+      background: linear-gradient(180deg, rgba(15,22,32,.95), rgba(10,15,22,.6));
+    }
+    body.internal .kv{
+      border-color: var(--retro-line);
+      background: rgba(10,14,20,.55);
+    }
+    body.internal .kv div:nth-child(odd){color: var(--retro-muted)}
+    body.internal .kv div:nth-child(even){color: var(--retro-text)}
+    body.internal input{
+      border-color: var(--retro-line);
+      background: rgba(10,14,20,.65);
+      color: var(--retro-text);
+    }
+    body.internal input:focus{border-color:#334155;box-shadow: 0 0 0 3px rgba(51,65,85,.5)}
+    body.internal .btn{background: rgba(203,213,225,.06);border-color: var(--retro-line);color: var(--retro-text)}
+    body.internal .btn.secondary{background: rgba(10,14,20,.65);border-color: var(--retro-line);color: var(--retro-text)}
+    body.internal .tag{border-color: var(--retro-line);background: rgba(10,14,20,.65);color: var(--retro-muted)}
+    body.internal .tag.good{border-color: rgba(52,211,153,.22);color: var(--retro-good);background: rgba(52,211,153,.06)}
+    body.internal .tag.info{border-color: rgba(245,158,11,.22);color: var(--retro-warn);background: rgba(245,158,11,.06)}
+    body.internal .tag .dot{background: #334155}
+    body.internal .tag.good .dot{background: var(--retro-good)}
+    body.internal .tag.info .dot{background: var(--retro-warn)}
+
+    .glitch{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(203,213,225,.92);
+      position:relative;
+      display:inline-block;
+    }
+    .glitch::before,
+    .glitch::after{
+      content: attr(data-text);
+      position:absolute;
+      left:0;top:0;
+      opacity:.35;
+      pointer-events:none;
+    }
+    .glitch::before{transform: translate(1px, 0)}
+    .glitch::after{transform: translate(-1px, 0)}
+    .blink{
+      animation: blink 2.9s steps(1,end) infinite;
+    }
+    @keyframes blink{
+      0%, 84%{opacity:1}
+      85%, 92%{opacity:.35}
+      93%, 100%{opacity:1}
     }
 
     .table{
@@ -213,101 +384,20 @@
       border-bottom:1px solid var(--line);
       vertical-align:top;
     }
-    .table th{color:var(--muted);font-weight:600;background: rgba(243,244,246,.6)}
+    body.internal .table th, body.internal .table td{
+      border-bottom-color: var(--retro-line);
+    }
+    .table th{color:var(--muted);font-weight:700;background: rgba(241,245,249,.55)}
+    body.internal .table th{
+      color: var(--retro-muted);
+      background: rgba(10,14,20,.55);
+    }
     .rowLink{cursor:pointer}
-    .rowLink:hover td{background: rgba(17,24,39,.03)}
-    .tag{
-      display:inline-flex;
-      padding:4px 8px;
-      border-radius: 999px;
-      border:1px solid var(--line);
-      font-size:11px;
-      background:#fff;
-    }
-    .tag.ok{border-color: rgba(6,95,70,.25); color: var(--ok)}
-    .tag.dim{color: var(--muted)}
-    .tag.warn{border-color: rgba(127,29,29,.25); color: var(--danger)}
-
-    .sideMenu{
-      display:flex;flex-direction:column;gap:8px;
-    }
-    .sideItem{
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius: 14px;
-      padding:10px 12px;
-      font-size:12px;
-      display:flex;align-items:center;justify-content:space-between;
-      cursor:pointer;
-      transition: transform .08s ease, background .2s ease;
-    }
-    .sideItem:hover{transform: translateY(-1px);background:#fcfcfc}
-    .sideItem[aria-selected="true"]{border-color:#cbd5e1;background:#fff}
-    .sideItem .hint{color:var(--muted);font-size:11px}
-
-    .ghostLine{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(17,24,39,.15), transparent);
-      margin: 14px 0;
-      opacity:.4;
-    }
-
-    .mask{
-      position:fixed;inset:0;
-      background: rgba(246,247,248,.92);
-      display:none;
-      z-index: 40;
-    }
-    .modal{
-      position:fixed;inset:0;
-      display:none;
-      z-index: 41;
-      align-items:center;justify-content:center;
-      padding:18px;
-    }
-    .modalPanel{
-      width:min(920px, 100%);
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 20px 70px rgba(17,24,39,.22);
-      overflow:hidden;
-    }
-    .modalTop{
-      padding:14px 16px;
-      border-bottom:1px solid var(--line);
-      display:flex;align-items:flex-start;justify-content:space-between;gap:12px
-    }
-    .modalTop h3{margin:0;font-size:13px;font-weight:650}
-    .x{
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius: 12px;
-      padding:8px 10px;
-      cursor:pointer;
-      font-size:12px;
-    }
-    .modalBody{padding:16px}
-    .empty{
-      border:1px dashed #d1d5db;
-      border-radius: 14px;
-      padding:16px;
-      color: var(--muted);
-      background: rgba(243,244,246,.45);
-      line-height:1.5;
-      font-size:12px;
-    }
-
-    .blink{
-      animation: blink 2.8s steps(1,end) infinite;
-    }
-    @keyframes blink{
-      0%, 85%{opacity:1}
-      86%, 92%{opacity:.35}
-      93%, 100%{opacity:1}
-    }
+    .rowLink:hover td{background: rgba(37,99,235,.06)}
+    body.internal .rowLink:hover td{background: rgba(203,213,225,.04)}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header class="topbar" role="banner">
@@ -315,16 +405,16 @@
         <div class="logo" aria-hidden="true"><span>ASC</span></div>
         <div>
           <h1>Agency of Security of Children</h1>
-          <p>Public information portal and secure staff access</p>
+          <p id="brandSub">Protéger, accompagner, reconstruire</p>
         </div>
       </div>
 
       <nav class="nav" aria-label="Navigation">
-        <div class="chip" data-page="home" aria-current="page">Home</div>
-        <div class="chip" data-page="mission">Mission</div>
-        <div class="chip" data-page="data">Public data</div>
-        <div class="chip" data-page="legal">Legal framework</div>
-        <div class="chip" data-page="staff">Staff access</div>
+        <div class="chip" data-page="accueil" aria-current="page">Accueil</div>
+        <div class="chip" data-page="aide">Aide et ressources</div>
+        <div class="chip" data-page="actions">Nos actions</div>
+        <div class="chip" data-page="temoins">Témoignages</div>
+        <div class="chip" data-page="acces">Accès personnel</div>
       </nav>
     </header>
 
@@ -332,35 +422,36 @@
       <section class="card" id="publicCard">
         <div class="cardHeader">
           <div>
-            <h2 id="publicTitle">Public statement</h2>
+            <h2 id="publicTitle">Bienvenue</h2>
             <div class="sub" id="publicSub">
-              The Agency supports territories in child protection operations. Our role is to ensure continuity, safety, and measurable outcomes.
+              Une protection simple, humaine et accessible. Ici, chaque enfant compte.
             </div>
           </div>
-          <div class="tag dim" id="publicTag">PUBLIC</div>
+          <div class="tag good" id="publicTag"><span class="dot"></span><span>PORTAIL PUBLIC</span></div>
         </div>
+
         <div class="cardBody" id="publicBody">
           <div class="notice">
             <div class="small">
-              <strong>Notice</strong><br />
-              Certain resources may be temporarily unavailable during consolidation procedures.
+              <strong>Notre promesse</strong><br />
+              Offrir un cadre stable, des repères, et un accompagnement clair pour les enfants confiés à la protection.
             </div>
           </div>
 
           <div class="divider"></div>
 
-          <div class="kv" aria-label="Key facts">
-            <div>Coverage</div><div>National network</div>
-            <div>Priority</div><div>Continuity of care</div>
-            <div>Method</div><div>Standardized follow up</div>
-            <div>Transparency</div><div>Public summaries only</div>
+          <div class="kv" aria-label="Informations clés">
+            <div>Assistance</div><div>24 heures sur 24</div>
+            <div>Orientation</div><div>Simple et guidée</div>
+            <div>Accompagnement</div><div>Parcours sécurisés</div>
+            <div>Suivi</div><div>Coordonné avec les territoires</div>
           </div>
 
-          <div class="ghostLine"></div>
+          <div class="divider"></div>
 
           <div class="small muted">
-            Latest update: <span class="mono">AUTO</span><br />
-            Some pages may display <span class="mono">Content unavailable</span> when access is not required.
+            Dernière mise à jour: <span class="mono">automatique</span><br />
+            Certaines pages peuvent être en cours de publication.
           </div>
         </div>
       </section>
@@ -368,49 +459,55 @@
       <aside class="card" id="sideCard">
         <div class="cardHeader">
           <div>
-            <h2>Access</h2>
-            <div class="sub">Secure entry for authorized staff</div>
+            <h2>Accès personnel</h2>
+            <div class="sub">Réservé aux agents habilités</div>
           </div>
-          <div class="tag dim">SECURED</div>
+          <div class="tag info"><span class="dot"></span><span>ESPACE SÉCURISÉ</span></div>
         </div>
+
         <div class="cardBody">
-          <div class="small muted">
-            This portal logs access attempts. No password recovery is provided through the public interface.
+          <div class="small muted" id="loginExplain">
+            Espace interne. Chaque tentative d’accès est enregistrée pour protéger les dossiers.
           </div>
 
           <div class="divider"></div>
 
           <div id="loginBox">
             <div class="field">
-              <label for="u">Identifier</label>
-              <input id="u" inputmode="numeric" autocomplete="off" placeholder="Example: 0175" />
+              <label for="u">Identifiant</label>
+              <input id="u" inputmode="numeric" autocomplete="off" placeholder="Exemple: 0175" />
             </div>
             <div class="field">
-              <label for="p">Password</label>
+              <label for="p">Mot de passe</label>
               <input id="p" type="password" autocomplete="off" placeholder="●●●●" />
             </div>
 
-            <div style="margin-top:12px;display:grid;gap:10px">
-              <button class="btn" id="loginBtn">Sign in</button>
-              <button class="btn secondary" id="demoBtn" title="Prefill for testing">Prefill test access</button>
+            <div class="ctaRow">
+              <button class="btn" id="loginBtn">Se connecter</button>
+              <button class="btn secondary" id="demoBtn" title="Préremplir pour tester">Test</button>
             </div>
 
             <div class="footer">
-              <span class="mono">ASC GATE v1.0</span>
-              <span class="mono">TRACE: ON</span>
+              <span class="mono" id="gateVer">ASC GATE v2</span>
+              <span class="mono" id="traceStatus">TRACE actif</span>
             </div>
           </div>
 
           <div id="loggedBox" style="display:none">
             <div class="notice">
               <div class="small">
-                <strong>Session</strong><br />
-                Staff identity verified. Redirecting to internal environment.
+                <strong>Connexion validée</strong><br />
+                Votre session est ouverte. Accès à l’environnement interne disponible.
               </div>
             </div>
             <div class="divider"></div>
-            <button class="btn" id="enterInternalBtn">Enter internal environment</button>
+            <button class="btn" id="enterInternalBtn">Accéder</button>
+            <div class="footer">
+              <span class="mono">SESSION</span>
+              <span class="mono" id="sessionHint">stable</span>
+            </div>
           </div>
+
         </div>
       </aside>
     </main>
@@ -419,25 +516,41 @@
       <section class="card">
         <div class="cardHeader">
           <div>
-            <h2>Agent profile</h2>
-            <div class="sub">Internal access level is assigned by territory</div>
+            <h2>Console agent</h2>
+            <div class="sub">
+              <span class="glitch" data-text="interface interne" id="internalSub">interface interne</span>
+              <span class="muted"> </span>
+              <span class="mono muted">mode archivage</span>
+            </div>
           </div>
-          <div class="tag dim">INTERNAL</div>
+          <div class="tag"><span class="dot"></span><span>ATLOC</span></div>
         </div>
+
         <div class="cardBody">
           <div class="kv">
-            <div>Agent</div><div><span class="mono" id="agentId">0175</span></div>
-            <div>Status</div><div><span class="tag ok">Active</span></div>
-            <div>Primary assignment</div><div>Atloc</div>
-            <div>Clearance level</div><div>3</div>
-            <div>Last sign in</div><div id="lastSignIn">Today</div>
-            <div>Psych review</div><div class="blink">Not required</div>
+            <div>Agent</div><div class="mono" id="agentId">0175</div>
+            <div>Statut</div><div><span class="tag good"><span class="dot"></span><span>actif</span></span></div>
+            <div>Affectation</div><div>Atloc</div>
+            <div>Niveau</div><div class="mono">3</div>
+            <div>Dernière connexion</div><div class="mono" id="lastSignIn">aujourd’hui</div>
+            <div>Évaluation</div><div class="mono blink" id="psyLine">non requise</div>
           </div>
 
           <div class="divider"></div>
 
           <div class="small muted">
-            Internal content is operational. Some records may appear empty when individual follow up is not required.
+            Si un champ apparaît vide, cela signifie que l’information n’est pas nécessaire.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="notice">
+            <div class="small">
+              <strong>Note système</strong><br />
+              <span class="mono">Centre de prise en charge</span> accessible par métro.<br />
+              Desservi: <span class="mono">non</span>.<br />
+              Motif: <span class="mono">incident classé</span>.
+            </div>
           </div>
         </div>
       </section>
@@ -445,131 +558,118 @@
       <section class="card" style="margin-top:18px">
         <div class="cardHeader">
           <div>
-            <h2>Internal dashboard</h2>
-            <div class="sub">Work queues are displayed by compliance priority</div>
+            <h2>Tableaux</h2>
+            <div class="sub">
+              Les listes ci dessous sont partielles.
+              <span class="mono muted">Certaines références ne sont pas affichées.</span>
+            </div>
           </div>
-          <div class="tag dim">ATLOC</div>
+          <div class="tag"><span class="dot"></span><span>INTERNE</span></div>
         </div>
-        <div class="cardBody" style="display:grid;grid-template-columns: 300px 1fr;gap:14px">
-          <div class="sideMenu" role="tablist" aria-label="Internal sections">
-            <div class="sideItem" data-tab="cases" aria-selected="true">
-              <span>Minor records</span>
-              <span class="hint mono">M</span>
-            </div>
-            <div class="sideItem" data-tab="reports" aria-selected="false">
-              <span>Reports</span>
-              <span class="hint mono">R</span>
-            </div>
-            <div class="sideItem" data-tab="incidents" aria-selected="false" id="incidentsTab">
-              <span>Incidents</span>
-              <span class="hint mono">I</span>
-            </div>
-            <div class="sideItem" data-tab="archives" aria-selected="false">
-              <span>Archives</span>
-              <span class="hint mono">A</span>
-            </div>
-            <div class="sideItem" data-tab="notes" aria-selected="false">
-              <span>Internal notes</span>
-              <span class="hint mono">N</span>
-            </div>
 
+        <div class="cardBody" style="display:grid;grid-template-columns: 320px 1fr;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <button class="btn secondary tabBtn" data-tab="dossiers">Dossiers enfants</button>
+            <button class="btn secondary tabBtn" data-tab="incidents">Incidents</button>
+            <button class="btn secondary tabBtn" data-tab="recherche">Archives</button>
+            <button class="btn secondary tabBtn" data-tab="notes">Notes</button>
             <div class="divider"></div>
+            <button class="btn secondary" id="signOutBtn">Fermer la session</button>
 
-            <button class="btn secondary" id="signOutBtn">Sign out</button>
+            <div class="notice" style="margin-top:10px">
+              <div class="small">
+                <strong>Indice</strong><br />
+                Certaines lignes changent si tu recharges.<br />
+                Certaines lignes changent si tu attends.
+              </div>
+            </div>
           </div>
 
           <div>
-            <div id="tab_cases">
-              <div class="notice">
-                <div class="small">
-                  <strong>Minor records</strong><br />
-                  Listing reflects operational status. Full personal histories are not displayed when follow up is not required.
-                </div>
-              </div>
-
-              <div class="divider"></div>
-
-              <table class="table" aria-label="Minor records">
+            <div id="tab_dossiers">
+              <table class="table" aria-label="Dossiers enfants">
                 <thead>
                   <tr>
-                    <th>Identifier</th>
-                    <th>Age at entry</th>
-                    <th>Status</th>
-                    <th>Location</th>
-                    <th>Observation</th>
+                    <th>Référence</th>
+                    <th>Âge</th>
+                    <th>Statut</th>
+                    <th>Localisation</th>
+                    <th>Suivi</th>
                   </tr>
                 </thead>
                 <tbody id="casesTbody"></tbody>
               </table>
-            </div>
-
-            <div id="tab_reports" style="display:none">
-              <div class="empty">
-                Reports are consolidated at territory level.<br />
-                Public interface does not provide direct access.<br />
-                <span class="mono">Reason: not required</span>
+              <div class="small muted" style="margin-top:10px">
+                Les dossiers intégrés n’exigent pas de suivi individualisé.
               </div>
             </div>
 
             <div id="tab_incidents" style="display:none">
-              <div class="notice">
-                <div class="small">
-                  <strong>Incidents</strong><br />
-                  This section is restricted. Events without systemic character do not require procedural change.
-                </div>
-              </div>
-
-              <div class="divider"></div>
-
-              <table class="table" aria-label="Incidents list">
+              <table class="table" aria-label="Incidents">
                 <thead>
                   <tr>
                     <th>Code</th>
-                    <th>Type</th>
-                    <th>Location</th>
+                    <th>État</th>
+                    <th>Lieu</th>
                     <th>Qualification</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody id="incidentsTbody"></tbody>
               </table>
-
               <div class="small muted" style="margin-top:10px">
-                Some entries may be redacted per legal compliance.
+                Les informations sensibles peuvent être masquées.
               </div>
             </div>
 
-            <div id="tab_archives" style="display:none">
+            <div id="tab_recherche" style="display:none">
+              <div class="field" style="margin-top:0">
+                <label for="q">Rechercher une référence exacte</label>
+                <input id="q" class="mono" autocomplete="off" placeholder="Exemple: M 44703 ou INC 0194" />
+              </div>
+              <div class="ctaRow" style="margin-top:10px">
+                <button class="btn" id="searchBtn">Rechercher</button>
+                <button class="btn secondary" id="clearBtn">Effacer</button>
+              </div>
+              <div class="divider"></div>
+              <div id="searchResult" class="notice">
+                <div class="small muted">Aucune requête.</div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="small muted">
+                Mot clé interdit: <span class="mono">enfant</span> <span class="mono">mort</span> <span class="mono">meurtre</span><br />
+                Mot clé toléré: <span class="mono">décédé</span>
+              </div>
+            </div>
+
+            <div id="tab_notes" style="display:none">
               <div class="notice">
                 <div class="small">
-                  <strong>Archives</strong><br />
-                  Search requires exact reference codes.
+                  <strong>Journal agent</strong><br />
+                  <span class="mono">SYNC</span> partiel.
+                  <span class="mono">Certaines pages n’existent plus.</span>
                 </div>
               </div>
 
               <div class="divider"></div>
 
-              <div class="field" style="margin-top:0">
-                <label for="q">Search reference</label>
-                <input id="q" class="mono" autocomplete="off" placeholder="Example: M-44703 or INC-0221" />
-              </div>
-              <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
-                <button class="btn" style="width:auto" id="searchBtn">Search</button>
-                <button class="btn secondary" style="width:auto" id="clearBtn">Clear</button>
+              <div class="small mono" id="notesArea" style="line-height:1.55;white-space:pre-wrap">
+[00:41] arrivée gare Atloc
+[00:56] transferts validés
+[01:12] centre prise en charge: accès maintenu
+[01:12] arrêt métro: supprimé
+[01:12] motif: incident classé
+[01:13] mot: "décédé"
+[01:13] mot: "décédé"
+[01:13] mot: "décédé"
               </div>
 
               <div class="divider"></div>
 
-              <div id="searchResult" class="empty">
-                No query entered.
-              </div>
-            </div>
-
-            <div id="tab_notes" style="display:none">
-              <div class="empty">
-                Internal notes are stored per agent.<br />
-                Access may be delayed during synchronization.<br />
-                <span class="mono">SYNC: pending</span>
+              <div class="small muted">
+                Si tu vois une phrase qui n’a rien à faire là, note la. Elle ne restera pas.
               </div>
             </div>
           </div>
@@ -579,151 +679,168 @@
   </div>
 
   <div class="mask" id="mask"></div>
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Details">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Détails">
     <div class="modalPanel">
       <div class="modalTop">
         <div>
-          <h3 id="modalTitle">Details</h3>
-          <div class="small muted" id="modalSub">Internal record view</div>
+          <h3 id="modalTitle">Détails</h3>
+          <div class="small muted" id="modalSub">Lecture interne</div>
         </div>
-        <button class="x" id="closeModalBtn">Close</button>
+        <button class="x" id="closeModalBtn">Fermer</button>
       </div>
       <div class="modalBody" id="modalBody"></div>
     </div>
   </div>
 
   <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
-    <div class="t1" id="toastT1">Notice</div>
+    <div class="t1" id="toastT1">Info</div>
     <div class="t2" id="toastT2">Message</div>
   </div>
 
   <script>
     const state = {
-      page: "home",
+      page: "accueil",
       logged: false,
       agent: null,
-      lastSignIn: null
+      lastSignIn: null,
+      internalTick: 0
     };
 
     const pages = {
-      home: {
-        title: "Public statement",
-        sub: "The Agency supports territories in child protection operations. Our role is to ensure continuity, safety, and measurable outcomes.",
-        tag: "PUBLIC",
+      accueil: {
+        title: "Bienvenue",
+        sub: "Une protection simple, humaine et accessible. Ici, chaque enfant compte.",
+        tagText: "PORTAIL PUBLIC",
+        tagClass: "good",
         body: `
           <div class="notice">
             <div class="small">
-              <strong>Notice</strong><br />
-              Certain resources may be temporarily unavailable during consolidation procedures.
+              <strong>Notre promesse</strong><br />
+              Offrir un cadre stable, des repères, et un accompagnement clair pour les enfants confiés à la protection.
             </div>
           </div>
 
           <div class="divider"></div>
 
-          <div class="kv" aria-label="Key facts">
-            <div>Coverage</div><div>National network</div>
-            <div>Priority</div><div>Continuity of care</div>
-            <div>Method</div><div>Standardized follow up</div>
-            <div>Transparency</div><div>Public summaries only</div>
+          <div class="kv" aria-label="Informations clés">
+            <div>Assistance</div><div>24 heures sur 24</div>
+            <div>Orientation</div><div>Simple et guidée</div>
+            <div>Accompagnement</div><div>Parcours sécurisés</div>
+            <div>Suivi</div><div>Coordonné avec les territoires</div>
           </div>
 
-          <div class="ghostLine"></div>
+          <div class="divider"></div>
 
           <div class="small muted">
-            Latest update: <span class="mono">AUTO</span><br />
-            Some pages may display <span class="mono">Content unavailable</span> when access is not required.
+            Tu cherches une démarche ou une aide rapide
+            <span class="mono">Aide et ressources</span> est le point de départ.
           </div>
         `
       },
-      mission: {
-        title: "Mission",
-        sub: "Protection is a process. Processes require stability. Stability requires consistency.",
-        tag: "PUBLIC",
-        body: `
-          <div class="small">
-            The Agency provides operational alignment for:
-            <div class="divider"></div>
-            <div class="kv">
-              <div>Intake</div><div>Standard triage procedures</div>
-              <div>Placement</div><div>Continuity by sector allocation</div>
-              <div>Follow up</div><div>Measurable compliance checks</div>
-              <div>Closure</div><div>Definitive integration status</div>
-            </div>
-            <div class="ghostLine"></div>
-            <div class="small muted">
-              Some program details are not displayed when disclosure is not required.
-            </div>
-          </div>
-        `
-      },
-      data: {
-        title: "Public data",
-        sub: "Summary indicators are provided for transparency. Individual histories are not public.",
-        tag: "PUBLIC",
+      aide: {
+        title: "Aide et ressources",
+        sub: "Des réponses claires, des étapes simples, un accompagnement concret.",
+        tagText: "AIDE",
+        tagClass: "good",
         body: `
           <div class="notice">
             <div class="small">
-              <strong>Public summary</strong><br />
-              Data below is aggregated and may be incomplete.
+              <strong>Vous n’êtes pas seul</strong><br />
+              Nous vous orientons vers les bons interlocuteurs et les démarches essentielles.
             </div>
           </div>
 
           <div class="divider"></div>
 
           <div class="kv">
-            <div>Active territories</div><div>42</div>
-            <div>Operational capacity</div><div>Consolidated</div>
-            <div>Average stability</div><div>High</div>
-            <div>Unresolved cases</div><div>0</div>
+            <div>Urgence</div><div>Orientation immédiate</div>
+            <div>Signalement</div><div>Procédure guidée</div>
+            <div>Accueil</div><div>Structures partenaires</div>
+            <div>Suivi</div><div>Coordination locale</div>
           </div>
 
-          <div class="ghostLine"></div>
+          <div class="divider"></div>
 
-          <div class="empty">
-            Detailed tables are temporarily unavailable.<br />
-            <span class="mono">Reason: consolidation</span>
-          </div>
-        `
-      },
-      legal: {
-        title: "Legal framework",
-        sub: "Compliance ensures safety. Safety ensures continuity. Continuity ensures closure.",
-        tag: "PUBLIC",
-        body: `
-          <div class="small">
-            This portal reflects statutory obligations and internal procedures.
-            <div class="divider"></div>
-
-            <div class="empty">
-              Legal documents are not available through the public portal.<br />
-              <span class="mono">Reason: not required</span>
-            </div>
-
-            <div class="ghostLine"></div>
-
-            <div class="small muted">
-              For official requests, contact your territory representative.
-            </div>
+          <div class="small muted">
+            Les informations sont présentées dans un langage accessible.
           </div>
         `
       },
-      staff: {
-        title: "Staff access",
-        sub: "Authorized staff only. Every attempt is recorded.",
-        tag: "SECURED",
+      actions: {
+        title: "Nos actions",
+        sub: "Prévenir, protéger, sécuriser, reconstruire.",
+        tagText: "ACTIONS",
+        tagClass: "good",
         body: `
           <div class="notice">
             <div class="small">
-              <strong>Secure entry</strong><br />
-              Use your assigned identifier and password.
+              <strong>Sur le terrain</strong><br />
+              Nous travaillons avec les territoires pour garantir la continuité des parcours et la sécurité des enfants.
             </div>
           </div>
 
           <div class="divider"></div>
 
-          <div class="empty">
-            Staff access is provided on the right panel.<br />
-            No password recovery is available through the public interface.
+          <div class="kv">
+            <div>Coordination</div><div>Réseau national</div>
+            <div>Qualité</div><div>Référentiels partagés</div>
+            <div>Formation</div><div>Outils pratiques</div>
+            <div>Évaluation</div><div>Indicateurs simples</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="small muted">
+            Une partie des documents techniques est réservée aux agents habilités.
+          </div>
+        `
+      },
+      temoins: {
+        title: "Témoignages",
+        sub: "Des parcours différents. Un même objectif: reconstruire.",
+        tagText: "HUMAIN",
+        tagClass: "good",
+        body: `
+          <div class="notice">
+            <div class="small">
+              <strong>Paroles</strong><br />
+              Les témoignages sont anonymisés et publiés avec accord.
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="kv">
+            <div>Stabilité</div><div>Retrouver un cadre</div>
+            <div>École</div><div>Reprendre confiance</div>
+            <div>Réseau</div><div>Ne plus être seul</div>
+            <div>Avenir</div><div>Se projeter</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="small muted">
+            Certains récits ne peuvent pas être affichés.
+          </div>
+        `
+      },
+      acces: {
+        title: "Accès personnel",
+        sub: "Réservé aux agents. Toute tentative est enregistrée.",
+        tagText: "SÉCURISÉ",
+        tagClass: "info",
+        body: `
+          <div class="notice">
+            <div class="small">
+              <strong>Accès interne</strong><br />
+              Utilisez votre identifiant et votre mot de passe attribués.
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="small muted">
+            Pour des raisons de sécurité, il n’existe pas de récupération de mot de passe via le portail public.
           </div>
         `
       }
@@ -734,6 +851,10 @@
     const publicSub = document.getElementById("publicSub");
     const publicTag = document.getElementById("publicTag");
     const publicBody = document.getElementById("publicBody");
+    const brandSub = document.getElementById("brandSub");
+
+    const publicGrid = document.getElementById("publicGrid");
+    const internalGrid = document.getElementById("internalGrid");
 
     const u = document.getElementById("u");
     const p = document.getElementById("p");
@@ -742,25 +863,11 @@
     const loginBox = document.getElementById("loginBox");
     const loggedBox = document.getElementById("loggedBox");
     const enterInternalBtn = document.getElementById("enterInternalBtn");
-
-    const publicGrid = document.getElementById("publicGrid");
-    const internalGrid = document.getElementById("internalGrid");
+    const sessionHint = document.getElementById("sessionHint");
 
     const agentId = document.getElementById("agentId");
     const lastSignIn = document.getElementById("lastSignIn");
-    const signOutBtn = document.getElementById("signOutBtn");
-
-    const casesTbody = document.getElementById("casesTbody");
-    const incidentsTbody = document.getElementById("incidentsTbody");
-
-    const tabs = Array.from(document.querySelectorAll(".sideItem"));
-    const tabPanels = {
-      cases: document.getElementById("tab_cases"),
-      reports: document.getElementById("tab_reports"),
-      incidents: document.getElementById("tab_incidents"),
-      archives: document.getElementById("tab_archives"),
-      notes: document.getElementById("tab_notes")
-    };
+    const psyLine = document.getElementById("psyLine");
 
     const toast = document.getElementById("toast");
     const toastT1 = document.getElementById("toastT1");
@@ -773,31 +880,49 @@
     const modalSub = document.getElementById("modalSub");
     const modalBody = document.getElementById("modalBody");
 
+    const signOutBtn = document.getElementById("signOutBtn");
+
+    const casesTbody = document.getElementById("casesTbody");
+    const incidentsTbody = document.getElementById("incidentsTbody");
+
+    const tabBtns = Array.from(document.querySelectorAll(".tabBtn"));
+    const tabs = {
+      dossiers: document.getElementById("tab_dossiers"),
+      incidents: document.getElementById("tab_incidents"),
+      recherche: document.getElementById("tab_recherche"),
+      notes: document.getElementById("tab_notes"),
+    };
+
     const q = document.getElementById("q");
     const searchBtn = document.getElementById("searchBtn");
     const clearBtn = document.getElementById("clearBtn");
     const searchResult = document.getElementById("searchResult");
+    const notesArea = document.getElementById("notesArea");
 
-    const CASES = [
-      { id:"M-44821", age:9,  status:"Integrated", location:"Atloc", obs:"Compliant" },
-      { id:"M-44703", age:14, status:"Integrated", location:"Atloc", obs:"Compliant" },
-      { id:"M-44590", age:11, status:"Integrated", location:"Atloc", obs:"Compliant" },
-      { id:"M-44218", age:16, status:"Integrated", location:"Atloc", obs:"Compliant" }
+    const DOSSIERS = [
+      { id:"M 44821", age:9,  statut:"intégré", lieu:"Atloc", suivi:"conforme" },
+      { id:"M 44703", age:14, statut:"intégré", lieu:"Atloc", suivi:"conforme" },
+      { id:"M 44590", age:11, statut:"intégré", lieu:"Atloc", suivi:"conforme" },
+      { id:"M 44218", age:16, statut:"intégré", lieu:"Atloc", suivi:"conforme" }
     ];
 
     const INCIDENTS = [
-      { id:"INC-0221", type:"Death", location:"Atloc residential sector", qual:"Domestic accident", action:"None" },
-      { id:"INC-0194", type:"Death", location:"Transport infrastructure", qual:"Isolated incident", action:"None" },
-      { id:"INC-0179", type:"Fatality", location:"Service corridor", qual:"Non systemic", action:"None" }
+      { id:"INC 0221", etat:"décédé", lieu:"secteur résidentiel", qualif:"accident domestique", action:"aucune" },
+      { id:"INC 0194", etat:"décédé", lieu:"infrastructure de transport", qualif:"incident isolé", action:"aucune" },
+      { id:"INC 0131", etat:"décédé", lieu:"station non desservie", qualif:"incident classé", action:"aucune" }
     ];
 
     function setPage(key){
       state.page = key;
       chips.forEach(c => c.setAttribute("aria-current", c.dataset.page === key ? "page" : "false"));
-      const data = pages[key] || pages.home;
+      const data = pages[key] || pages.accueil;
+
       publicTitle.textContent = data.title;
       publicSub.textContent = data.sub;
-      publicTag.textContent = data.tag;
+
+      publicTag.className = "tag " + (data.tagClass || "");
+      publicTag.innerHTML = `<span class="dot"></span><span>${data.tagText}</span>`;
+
       publicBody.innerHTML = data.body;
       publicBody.classList.remove("fade");
       void publicBody.offsetWidth;
@@ -814,77 +939,12 @@
       void toast.offsetWidth;
       toast.classList.add("fade");
       clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => { toast.style.display = "none"; }, 3600);
+      showToast._t = setTimeout(() => { toast.style.display = "none"; }, 3800);
     }
 
-    function jitterDelay(msMin, msMax){
-      const r = msMin + Math.floor(Math.random() * (msMax - msMin + 1));
+    function jitterDelay(min, max){
+      const r = min + Math.floor(Math.random() * (max - min + 1));
       return new Promise(res => setTimeout(res, r));
-    }
-
-    function signIn(agent){
-      state.logged = true;
-      state.agent = agent;
-      state.lastSignIn = new Date().toLocaleString(undefined, { hour:"2-digit", minute:"2-digit", day:"2-digit", month:"2-digit", year:"numeric" });
-
-      loginBox.style.display = "none";
-      loggedBox.style.display = "block";
-
-      showToast("Session", "Identity verified. Internal environment is available.");
-    }
-
-    async function handleLogin(){
-      const id = (u.value || "").trim();
-      const pw = (p.value || "").trim();
-
-      await jitterDelay(220, 620);
-
-      if(id === "0175" && pw === "1234"){
-        signIn("0175");
-      } else {
-        showToast("Access denied", "Unauthorized credentials. Attempt recorded.");
-        p.value = "";
-        p.focus();
-      }
-    }
-
-    loginBtn.addEventListener("click", handleLogin);
-    demoBtn.addEventListener("click", () => { u.value = "0175"; p.value = "1234"; showToast("Prefill", "Test access values inserted."); });
-
-    [u,p].forEach(el => el.addEventListener("keydown", e => {
-      if(e.key === "Enter"){ handleLogin(); }
-    }));
-
-    function populateTables(){
-      casesTbody.innerHTML = "";
-      CASES.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.className = "rowLink";
-        tr.innerHTML = `
-          <td class="mono">${row.id}</td>
-          <td>${row.age}</td>
-          <td><span class="tag ok">${row.status}</span></td>
-          <td>${row.location}</td>
-          <td>${row.obs}</td>
-        `;
-        tr.addEventListener("click", () => openCase(row));
-        casesTbody.appendChild(tr);
-      });
-
-      incidentsTbody.innerHTML = "";
-      INCIDENTS.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.className = "rowLink";
-        tr.innerHTML = `
-          <td class="mono">${row.id}</td>
-          <td><span class="tag warn">${row.type}</span></td>
-          <td>${row.location}</td>
-          <td>${row.qual}</td>
-          <td>${row.action}</td>
-        `;
-        tr.addEventListener("click", () => openIncident(row));
-        incidentsTbody.appendChild(tr);
-      });
     }
 
     function openModal(){
@@ -902,74 +962,179 @@
     mask.addEventListener("click", closeModal);
     window.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
 
-    async function openCase(row){
-      modalTitle.textContent = `Minor record ${row.id}`;
-      modalSub.textContent = "Internal record view";
+    function normalizeRef(s){
+      return (s || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toUpperCase();
+    }
+
+    function populateTables(){
+      casesTbody.innerHTML = "";
+      DOSSIERS.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.className = "rowLink";
+        tr.innerHTML = `
+          <td class="mono">${row.id}</td>
+          <td>${row.age}</td>
+          <td>${row.statut}</td>
+          <td>${row.lieu}</td>
+          <td>${row.suivi}</td>
+        `;
+        tr.addEventListener("click", () => openDossier(row));
+        casesTbody.appendChild(tr);
+      });
+
+      incidentsTbody.innerHTML = "";
+      INCIDENTS.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.className = "rowLink";
+        tr.innerHTML = `
+          <td class="mono">${row.id}</td>
+          <td>${row.etat}</td>
+          <td>${row.lieu}</td>
+          <td>${row.qualif}</td>
+          <td>${row.action}</td>
+        `;
+        tr.addEventListener("click", () => openIncident(row));
+        incidentsTbody.appendChild(tr);
+      });
+    }
+
+    async function openDossier(row){
+      modalTitle.textContent = `Dossier ${row.id}`;
+      modalSub.textContent = "lecture interne";
       modalBody.innerHTML = `
         <div class="kv">
-          <div>Identifier</div><div class="mono">${row.id}</div>
-          <div>Status</div><div><span class="tag ok">Integrated</span></div>
-          <div>Current location</div><div>Atloc</div>
-          <div>Individual history</div><div class="mono">Not required</div>
-          <div>Antecedents</div><div class="mono">Not applicable</div>
-          <div>Current situation</div><div>Stabilized</div>
+          <div>Référence</div><div class="mono">${row.id}</div>
+          <div>Statut</div><div class="mono">intégré</div>
+          <div>Localisation</div><div class="mono">Atloc</div>
+          <div>Historique</div><div class="mono">non nécessaire</div>
+          <div>Antécédents</div><div class="mono">sans objet</div>
+          <div>Suivi</div><div class="mono">clos</div>
         </div>
-        <div class="ghostLine"></div>
+        <div class="divider"></div>
         <div class="small muted">
-          This minor no longer requires individual follow up.
+          Ce dossier ne requiert plus de suivi individualisé.
         </div>
       `;
       openModal();
 
-      await jitterDelay(220, 520);
+      await jitterDelay(220, 650);
+
       if(Math.random() < 0.22){
-        showToast("Synchronization", "Some details were removed during consolidation.");
+        showToast("Synchronisation", "Certaines lignes ont été retirées.");
       }
     }
 
     async function openIncident(row){
       modalTitle.textContent = `Incident ${row.id}`;
-      modalSub.textContent = "Restricted section";
+      modalSub.textContent = "section restreinte";
+      const extra = (row.id === "INC 0131")
+        ? `
+          <div class="divider"></div>
+          <div class="notice">
+            <div class="small">
+              <strong>Centre de prise en charge</strong><br />
+              Station associée: <span class="mono">CPC</span><br />
+              Desservie: <span class="mono">non</span><br />
+              Justification: <span class="mono">incident classé</span>
+            </div>
+          </div>
+        `
+        : ``;
+
       modalBody.innerHTML = `
         <div class="kv">
           <div>Code</div><div class="mono">${row.id}</div>
-          <div>Type</div><div><span class="tag warn">${row.type}</span></div>
-          <div>Location</div><div>${row.location}</div>
-          <div>Qualification</div><div>${row.qual}</div>
-          <div>Systemic character</div><div class="mono">None</div>
-          <div>Procedure change</div><div class="mono">Not required</div>
+          <div>État</div><div class="mono">${row.etat}</div>
+          <div>Lieu</div><div class="mono">${row.lieu}</div>
+          <div>Qualification</div><div class="mono">${row.qualif}</div>
+          <div>Caractère systémique</div><div class="mono">aucun</div>
+          <div>Changement procédure</div><div class="mono">non requis</div>
         </div>
-        <div class="ghostLine"></div>
-        <div class="empty">
-          The event does not present a systemic character.<br />
-          No procedural adjustment is required.
+        ${extra}
+        <div class="divider"></div>
+        <div class="small muted">
+          Les annexes ne sont pas nécessaires.
         </div>
       `;
       openModal();
 
-      await jitterDelay(260, 680);
-      if(row.id === "INC-0194"){
-        showToast("Notice", "A related annex is unavailable.");
+      await jitterDelay(250, 750);
+
+      if(row.id === "INC 0194"){
+        showToast("Annexe", "indisponible");
       }
     }
 
+    async function handleLogin(){
+      const id = (u.value || "").trim();
+      const pw = (p.value || "").trim();
+
+      await jitterDelay(240, 720);
+
+      if(id === "0175" && pw === "1234"){
+        state.logged = true;
+        state.agent = id;
+        state.lastSignIn = new Date().toLocaleString("fr-FR", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" });
+
+        loginBox.style.display = "none";
+        loggedBox.style.display = "block";
+        sessionHint.textContent = "ouverte";
+
+        showToast("Connexion", "Session validée.");
+      } else {
+        showToast("Accès refusé", "Identifiants invalides. Tentative enregistrée.");
+        p.value = "";
+        p.focus();
+      }
+    }
+
+    loginBtn.addEventListener("click", handleLogin);
+    demoBtn.addEventListener("click", () => {
+      u.value = "0175";
+      p.value = "1234";
+      showToast("Test", "Identifiants insérés.");
+    });
+    [u,p].forEach(el => el.addEventListener("keydown", e => { if(e.key === "Enter") handleLogin(); }));
+
     function enterInternal(){
       if(!state.logged) return;
+
+      document.body.classList.add("internal");
+
+      brandSub.textContent = "système interne";
       publicGrid.style.display = "none";
       internalGrid.style.display = "block";
+
       agentId.textContent = state.agent || "0175";
-      lastSignIn.textContent = state.lastSignIn || "Today";
+      lastSignIn.textContent = state.lastSignIn || "aujourd’hui";
+
       populateTables();
-      showToast("Internal environment", "Atloc workspace loaded.");
+      activateTab("dossiers");
+
+      showToast("Environnement interne", "Atloc chargé.");
+
+      seedArg();
+      startInternalTick();
     }
+
     enterInternalBtn.addEventListener("click", async () => {
-      await jitterDelay(120, 420);
+      await jitterDelay(120, 460);
       enterInternal();
     });
 
     function signOut(){
       state.logged = false;
       state.agent = null;
+      state.lastSignIn = null;
+      state.internalTick = 0;
+
+      stopInternalTick();
+
+      document.body.classList.remove("internal");
+      brandSub.textContent = "Protéger, accompagner, reconstruire";
 
       internalGrid.style.display = "none";
       publicGrid.style.display = "grid";
@@ -978,100 +1143,159 @@
 
       u.value = "";
       p.value = "";
-      setPage("home");
-      showToast("Signed out", "Session closed.");
+      setPage("accueil");
+
+      showToast("Session fermée", "Déconnexion effectuée.");
     }
     signOutBtn.addEventListener("click", signOut);
 
-    tabs.forEach(t => t.addEventListener("click", async () => {
-      const tab = t.dataset.tab;
-
-      tabs.forEach(x => x.setAttribute("aria-selected", x === t ? "true" : "false"));
-      Object.entries(tabPanels).forEach(([k, el]) => el.style.display = (k === tab) ? "block" : "none");
-
-      if(tab === "incidents"){
-        await jitterDelay(150, 480);
-        if(Math.random() < 0.3){
-          showToast("Restriction", "Some incident details are withheld by compliance.");
-        }
-      }
-    }));
-
-    function normalizeKey(s){ return (s || "").trim().toUpperCase(); }
+    function activateTab(key){
+      Object.values(tabs).forEach(el => el.style.display = "none");
+      tabs[key].style.display = "block";
+    }
+    tabBtns.forEach(b => b.addEventListener("click", () => activateTab(b.dataset.tab)));
 
     async function runSearch(){
-      const key = normalizeKey(q.value);
+      const raw = q.value || "";
+      const key = normalizeRef(raw.replace(/[-_]/g, " ").replace(/\s+/g, " "));
+
       if(!key){
-        searchResult.textContent = "No query entered.";
+        searchResult.innerHTML = `<div class="small muted">Aucune requête.</div>`;
         return;
       }
 
-      searchResult.innerHTML = `<span class="mono">Searching</span>`;
-      await jitterDelay(240, 820);
+      searchResult.innerHTML = `<div class="small mono">recherche</div>`;
+      await jitterDelay(260, 900);
 
-      const caseMatch = CASES.find(c => c.id === key);
-      const incMatch = INCIDENTS.find(i => i.id === key);
+      const interdits = ["ENFANT","MORT","MEURTRE","DISPARITION","ASSASSINAT","DECES","DÉCÈS","ASE","ATLOC"];
+      if(interdits.includes(key)){
+        searchResult.innerHTML = `
+          <div class="small mono">
+            0 résultat<br />
+            affiner la requête
+          </div>
+        `;
+        showToast("Recherche", "0 résultat.");
+        return;
+      }
 
-      if(caseMatch){
+      const dossier = DOSSIERS.find(d => d.id === key);
+      const incident = INCIDENTS.find(i => i.id === key);
+
+      if(dossier){
         searchResult.innerHTML = `
           <div class="kv">
-            <div>Reference</div><div class="mono">${caseMatch.id}</div>
-            <div>State</div><div>Closed definitively</div>
-            <div>Disclosure</div><div class="mono">Not required</div>
+            <div>Référence</div><div class="mono">${dossier.id}</div>
+            <div>État</div><div class="mono">clos définitivement</div>
+            <div>Historique</div><div class="mono">non nécessaire</div>
           </div>
-          <div class="ghostLine"></div>
-          <div class="small muted">Individual history is not accessible through this interface.</div>
+          <div class="divider"></div>
+          <div class="small muted">Le contenu détaillé n’est pas requis.</div>
         `;
         return;
       }
 
-      if(incMatch){
+      if(incident){
         searchResult.innerHTML = `
           <div class="kv">
-            <div>Reference</div><div class="mono">${incMatch.id}</div>
-            <div>State</div><div>Closed</div>
-            <div>Annex</div><div class="mono">Unavailable</div>
+            <div>Référence</div><div class="mono">${incident.id}</div>
+            <div>État</div><div class="mono">${incident.etat}</div>
+            <div>Annexe</div><div class="mono">indisponible</div>
           </div>
-          <div class="ghostLine"></div>
-          <div class="empty">
-            This record is subject to compliance restrictions.<br />
-            <span class="mono">Reason: not required</span>
-          </div>
+          <div class="divider"></div>
+          <div class="small mono">non requis</div>
         `;
+        if(incident.id === "INC 0131"){
+          showToast("Restriction", "accès partiel");
+        }
         return;
       }
 
-      await jitterDelay(160, 420);
-
-      const genericWords = ["ENFANT","CHILD","MURDER","MEURTRE","DISPARITION","DEATH","MORT","ASE","ATLOC"];
-      if(genericWords.includes(key)){
+      if(key === "DECEDÉ" || key === "DÉCÉDÉ"){
+        const b64 = "Q1BDOiBzdGF0aW9uIG5vbiBkZXNzZXJ2aWUKQWNjw6hzOiB0cm91dmVyIGxlIGNvZGUgZGFucyBsZSBtw6l0cm8K";
         searchResult.innerHTML = `
-          <div class="empty">
-            No results found.<br />
-            Would you like to refine your query
+          <div class="notice">
+            <div class="small">
+              <strong>Journal</strong><br />
+              <span class="mono">décédé</span><br />
+              <span class="mono">décédé</span><br />
+              <span class="mono">décédé</span>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="small muted">
+            <span class="mono">indice</span> : ${b64}
           </div>
         `;
-        showToast("Search", "No matching records.");
         return;
       }
 
       searchResult.innerHTML = `
-        <div class="empty">
-          No records match this reference.<br />
-          This information may not have existed.
+        <div class="small mono">
+          aucun dossier correspondant<br />
+          cette information peut ne pas avoir existé
         </div>
       `;
-      showToast("Search", "No matching records.");
+      showToast("Recherche", "0 résultat.");
     }
 
     searchBtn.addEventListener("click", runSearch);
-    clearBtn.addEventListener("click", () => { q.value = ""; searchResult.textContent = "No query entered."; });
+    clearBtn.addEventListener("click", () => {
+      q.value = "";
+      searchResult.innerHTML = `<div class="small muted">Aucune requête.</div>`;
+    });
     q.addEventListener("keydown", e => { if(e.key === "Enter") runSearch(); });
 
-    setPage("home");
+    function seedArg(){
+      try{
+        console.log("%cASC", "color:#cbd5e1;background:#0b0f14;padding:2px 6px;border-radius:6px;font-weight:700");
+        console.log("%cindice console", "color:#7b8aa6");
+        console.log("%cQ1BDIGV4aXN0ZS4gTGUgbcOpdHJvIG5lIHMneWFycsOqdGUgcGFzLg==", "color:#cbd5e1;font-family:monospace");
+        console.log("%cSi tu comprends, retourne au métro.", "color:#7b8aa6");
+      } catch(e){}
+    }
+
+    let internalTimer = null;
+    function startInternalTick(){
+      stopInternalTick();
+      internalTimer = setInterval(() => {
+        state.internalTick += 1;
+
+        if(state.internalTick === 6){
+          psyLine.textContent = "non requise";
+        }
+        if(state.internalTick === 12){
+          psyLine.textContent = "non requise";
+          showToast("Sync", "partiel");
+        }
+        if(state.internalTick === 18){
+          psyLine.textContent = "non requise";
+          if(Math.random() < 0.8){
+            notesArea.textContent = notesArea.textContent + "\n[01:14] " + "la station ne s’arrête pas";
+          }
+        }
+        if(state.internalTick === 24){
+          psyLine.textContent = "non requise";
+          if(Math.random() < 0.7){
+            notesArea.textContent = notesArea.textContent + "\n[01:15] " + "cpc";
+          }
+        }
+      }, 1200);
+    }
+    function stopInternalTick(){
+      if(internalTimer){ clearInterval(internalTimer); internalTimer = null; }
+    }
+
+    setPage("accueil");
+
+    /* Petit détail ARG, discret et volontaire.
+       Si quelqu’un fouille le localStorage, il trouve une trace.
+    */
+    try{
+      if(!localStorage.getItem("asc_trace")){
+        localStorage.setItem("asc_trace", "0175");
+      }
+    } catch(e){}
   </script>
 </body>
 </html>
-```
-
-Si tu veux, je peux faire la v2 avec une vraie page “Incidents” qui contient un seul dossier qui “accroche” et laisse apparaître une ligne de texte impossible, puis disparaît quand tu recharges la page.
